@@ -1,0 +1,24 @@
+#include <stdio.h>
+#define LENGTH 16
+#define NROWS 4
+#define NCOLS 4
+#define ROUND 10 
+typedef unsigned char byte;
+rijndael(byte plaintext[LENGTH),byte ciphertext[LENGTH],byte key[LENGTH]){
+int r;
+byte state[NROWS][NCOLS];
+struct{
+    byte k[NROWS][NCOLS];
+}rk[ROUND+1];
+
+expand_key(key,rk);
+copy_plaintext_to_state(state,plaintext);
+xor_roundkey_into_state(state,rk[0]);
+for(r=1;r<=ROUND;r++){
+    substitute(state);
+    rotate_ROWS(state);
+    if(r<ROUND)mix_columns(state);
+    xor_roundkey_into_state(state,rk[r]);
+}
+copy_state_to_ciphertext(ciphertext,state);
+}
