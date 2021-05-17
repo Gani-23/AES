@@ -4,7 +4,7 @@
 #define NCOLS 4
 #define ROUND 10 
 typedef unsigned char byte;
-rijndael(byte plaintext[LENGTH),byte ciphertext[LENGTH],byte key[LENGTH]){
+rijndael(byte plaintext[LENGTH],byte ciphertext[LENGTH],byte key[LENGTH]){
 int r;
 byte state[NROWS][NCOLS];
 struct{
